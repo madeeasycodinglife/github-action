@@ -20,8 +20,16 @@ jobs:
         run: docker build -t github-action:latest .
 
       - name: 🚀 Trigger Render Deploy via API
-        uses: render-actions/deploy@v1
-        with:
-          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          # Install curl if not already available
+          sudo apt-get update && sudo apt-get install -y curl
+
+          # Create deployment on Render
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json" \
+            "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -d '{
+              "clearCache": "clear"
+            }'
