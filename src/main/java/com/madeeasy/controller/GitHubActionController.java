@@ -11,6 +11,11 @@ import java.util.Map;
 @RequestMapping(path = "/api/github")
 public class GitHubActionController {
 
+    @GetMapping(path = "/")
+    public String home() {
+        return "🚀 CI/CD Works! Updated via GitHub Actions.";
+    }
+
     @GetMapping(path = "/hello")
     public String sayHello() {
         return "👋 Hello from GitHub Actions Deployed App!";
