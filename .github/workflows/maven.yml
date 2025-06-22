@@ -1,0 +1,27 @@
+name: CI/CD to Render (via Render API)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to Render
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout source code
+        uses: actions/checkout@v3
+
+      - name: 🧱 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🐳 Build Docker Image (multi-stage)
+        run: docker build -t github-action:latest .
+
+      - name: 🚀 Trigger Render Deploy via API
+        uses: render-actions/deploy@v1
+        with:
+          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
