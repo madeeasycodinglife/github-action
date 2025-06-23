@@ -3,6 +3,8 @@
 ## 🚀 Project Overview
 
 **Live Demo**: [https://github-action-svw0.onrender.com](https://github-action-svw0.onrender.com)
+> ⏳ **Note**: This demo is hosted on the free tier of [Render](https://render.com), which may put the service to sleep when inactive.
+> 🕒 It may take **up to 1 minute and 35 seconds** to start — please be patient while the server wakes up.
 
 
 This project demonstrates a professional-grade CI/CD pipeline for a Spring Boot application using:
